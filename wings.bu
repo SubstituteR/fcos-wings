@@ -2,7 +2,7 @@ variant: fcos
 version: 1.5.0
 passwd:
   users:
-    - name: wings
+    - name: core
       ssh_authorized_keys_local:
       - ${authorized_keys}
 systemd:
