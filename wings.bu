@@ -1,0 +1,54 @@
+variant: fcos
+version: 1.5.0
+passwd:
+  users:
+    - name: wings
+      ssh_authorized_keys_local:
+      - ${authorized_keys}
+systemd:
+  units:
+    - name: wings.service
+      enabled: true
+      contents: |
+        [Unit]
+        Description=Wings Service
+        After=docker.service
+        Requires=docker.service
+        PartOf=docker.service
+        [Service]
+        User=root
+        TimeoutStartSec=0
+        Restart=always
+        ExecStartPre=-/usr/bin/docker stop %n
+        ExecStartPre=-/usr/bin/docker rm %n
+        ExecStartPre=/usr/bin/docker pull ghcr.io/pterodactyl/wings:latest
+        ExecStart=/usr/bin/docker run --rm --name %n \
+          --security-opt label=type:container_runtime_t \
+          -p 8080:8080 \
+          -p 2022:2022 \
+          -v "/var/run/docker.sock:/var/run/docker.sock" \
+          -v "/var/lib/docker/containers/:/var/lib/docker/containers/:z" \
+          -v "/etc/pterodactyl/:/etc/pterodactyl/:z" \
+          -v "/var/lib/pterodactyl/:/var/lib/pterodactyl/:z" \
+          -v "/var/log/pterodactyl/:/var/log/pterodactyl/:z" \
+          -v "/tmp/pterodactyl/:/tmp/pterodactyl/:z" \
+          -v "/etc/ssl/certs:/etc/ssl/certs:z" \
+          ghcr.io/pterodactyl/wings:latest
+        [Install]
+        WantedBy=multi-user.target
+    - name: wg-quick@wg0.service
+      enabled: true
+storage:
+  files:
+    - path: /etc/pterodactyl/config.yml
+      mode: 0644
+      contents:
+        local: ${wings_config}
+    - path: /etc/wireguard/wg0.conf
+      mode: 0600
+      contents:
+        local: wireguard.conf
+    - path: /etc/NetworkManager/system-connections/${interface}.nmconnection
+      mode: 0600
+      contents:
+        local: network.mnconnection

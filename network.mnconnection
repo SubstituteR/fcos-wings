@@ -1,0 +1,11 @@
+[connection]
+id=${interface}
+type=ethernet
+interface-name=${interface}
+[ipv4]
+address1=${ip}/${prefix},${gateway}
+dhcp-hostname=${hostname}
+dns=${nameserver};
+dns-search=
+may-fail=false
+method=manual
