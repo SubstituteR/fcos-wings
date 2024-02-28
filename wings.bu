@@ -24,8 +24,7 @@ systemd:
         ExecStartPre=/usr/bin/docker pull ghcr.io/pterodactyl/wings:latest
         ExecStart=/usr/bin/docker run --rm --name %n \
           --security-opt label=type:container_runtime_t \
-          -p 8080:8080 \
-          -p 2022:2022 \
+          --net=host \
           -v "/var/run/docker.sock:/var/run/docker.sock" \
           -v "/var/lib/docker/containers/:/var/lib/docker/containers/:z" \
           -v "/etc/pterodactyl/:/etc/pterodactyl/:z" \
