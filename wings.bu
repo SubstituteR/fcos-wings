@@ -51,3 +51,7 @@ storage:
       mode: 0600
       contents:
         local: network.mnconnection
+    - path: /etc/hostname
+      mode: 0644
+      contents:
+        inline: ${hostname}
