@@ -38,6 +38,21 @@ systemd:
     - name: wg-quick@wg0.service
       enabled: true
 storage:
+  disks:
+    device: /dev/disk/by-id/coreos-boot-disk
+    wipe_table: false
+    partitions:
+    - number: 4
+      label: root
+      size_mib: 8192
+      resize: true
+    - size_mib: 0
+      label: var
+  filesystems:
+    - path: /var
+      device: /dev/disk/by-partlabel/var
+      format: btrfs
+      with_mount_unit: true
   files:
     - path: /etc/pterodactyl/config.yml
       mode: 0644
