@@ -39,7 +39,7 @@ systemd:
       enabled: true
 storage:
   disks:
-    device: /dev/disk/by-id/coreos-boot-disk
+  - device: /dev/disk/by-id/coreos-boot-disk
     wipe_table: false
     partitions:
     - number: 4
