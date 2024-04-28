@@ -47,10 +47,10 @@ storage:
       size_mib: 8192
       resize: true
     - size_mib: 0
-      label: var
+      label: containers-shared
   filesystems:
-    - path: /var
-      device: /dev/disk/by-partlabel/var
+    - path: /var/srv/containers
+      device: /dev/disk/by-partlabel/containers-shared
       format: btrfs
       with_mount_unit: true
   files:
