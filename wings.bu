@@ -58,6 +58,14 @@ storage:
       mode: 0644
       contents:
         local: ${wings_config}
+    - path: /etc/pterodactyl/fullchain.pem
+      mode: 0644
+      contents:
+        local: ${wings_cert}
+    - path: /etc/pterodactyl/privkey.pem
+      mode: 0644
+      contents:
+        local: ${wings_key}
     - path: /etc/wireguard/wg0.conf
       mode: 0600
       contents:
