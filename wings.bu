@@ -78,3 +78,8 @@ storage:
       mode: 0644
       contents:
         inline: ${hostname}
+  links:
+    - path: /var/lib/pterodactyl
+      overwrite: true
+      target: /var/lib/docker/pterodactyl
+      hard: false
