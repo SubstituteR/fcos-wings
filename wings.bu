@@ -28,7 +28,7 @@ systemd:
           -v "/var/run/docker.sock:/var/run/docker.sock" \
           -v "/var/lib/docker/containers/:/var/lib/docker/containers/:z" \
           -v "/etc/pterodactyl/:/etc/pterodactyl/:z" \
-          -v "/var/lib/pterodactyl/:/var/lib/pterodactyl/:z" \
+          -v "/srv/containers/pterodactyl/:/var/lib/pterodactyl/:z" \
           -v "/var/log/pterodactyl/:/var/log/pterodactyl/:z" \
           -v "/tmp/pterodactyl/:/tmp/pterodactyl/:z" \
           -v "/etc/ssl/certs:/etc/ssl/certs:z" \
