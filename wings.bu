@@ -78,6 +78,10 @@ storage:
       mode: 0644
       contents:
         inline: ${hostname}
+    - path: /etc/docker/daemon.json
+      mode: 0644
+      contents:
+        inline: '{"data-root": "/var/srv/containers/docker"}'
   links:
     - path: /var/lib/pterodactyl
       overwrite: true
